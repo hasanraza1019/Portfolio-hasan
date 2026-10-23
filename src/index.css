@@ -1,0 +1,193 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #050816;
+  --color-bg-soft: #0a0e27;
+  --color-primary: #00e5ff;
+  --color-secondary: #7b2ff7;
+  --color-accent: #00ffae;
+  --font-display: "Orbitron", "Sora", sans-serif;
+  --font-body: "Sora", sans-serif;
+}
+
+:root {
+  --color-bg: #050816;
+  --color-bg-soft: #0a0e27;
+  --color-primary: #00e5ff;
+  --color-secondary: #7b2ff7;
+  --color-accent: #00ffae;
+  --glow-primary: rgba(0, 229, 255, 0.35);
+  --glow-secondary: rgba(123, 47, 247, 0.25);
+}
+
+[data-theme="violet"] {
+  --color-primary: #c084fc;
+  --color-secondary: #f43f5e;
+  --color-accent: #38bdf8;
+  --glow-primary: rgba(192, 132, 252, 0.45);
+  --glow-secondary: rgba(244, 63, 94, 0.35);
+}
+
+[data-theme="emerald"] {
+  --color-primary: #10b981;
+  --color-secondary: #06b6d4;
+  --color-accent: #fbbf24;
+  --glow-primary: rgba(16, 185, 129, 0.45);
+  --glow-secondary: rgba(6, 182, 212, 0.35);
+}
+
+[data-theme="gold"] {
+  --color-primary: #fbbf24;
+  --color-secondary: #ef4444;
+  --color-accent: #00e5ff;
+  --glow-primary: rgba(251, 191, 36, 0.45);
+  --glow-secondary: rgba(239, 68, 68, 0.35);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+section {
+  scroll-margin-top: 90px;
+}
+
+html, body {
+  background: var(--color-bg);
+  color: #ffffff;
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+.bg-cyber-grid {
+  background-size: 50px 50px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+::selection {
+  background: var(--color-primary);
+  color: #050816;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #050816;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--color-primary), var(--color-secondary));
+  border-radius: 10px;
+}
+
+.glass {
+  background: rgba(12, 17, 38, 0.70);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-subtle {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glow-border {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glow-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.glow-border:hover::before {
+  opacity: 1;
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(90deg, #fce043, #fb7185, #38bdf8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.section-label {
+  font-family: var(--font-display);
+  letter-spacing: 0.3em;
+  font-size: 0.75rem;
+  color: var(--color-primary);
+  text-transform: uppercase;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-14px); }
+}
+.float { animation: float 6s ease-in-out infinite; }
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px var(--glow-primary), 0 0 45px var(--glow-secondary); }
+  50% { box-shadow: 0 0 35px var(--glow-primary), 0 0 80px var(--glow-secondary); }
+}
+.pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+
+@keyframes spin-slow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 18s linear infinite;
+}
+
+@keyframes spin-reverse-slow {
+  0% { transform: rotate(360deg); }
+  100% { transform: rotate(0deg); }
+}
+.animate-spin-reverse-slow {
+  animation: spin-reverse-slow 24s linear infinite;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@media (max-width: 768px) {
+  html, body { cursor: auto; }
+}
